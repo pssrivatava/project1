@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <style>
+            #shape
+            {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+                display: none;
+                position: relative;
+            }
+            body
+            {
+                margin: 0;
+                padding: 0 auto;
+                font-family: sans-serif;
+            }
+            #para
+            {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Test your reactions!</h1>
+        <p>click on the boxes and circles!</p>
+        <p id="para">Your time <span id="timetaken"></span></p>
+        <div id="shape"> </div>
+        
+        <script>
+             var start=new Date().getTime();
+             function getRandomColor()
+             {
+                 var letter = "0123456789ABCDEF".split('');
+                 var color="#";
+                 for(var i=0;i<6;i++)
+                 {
+                     color = color + letter[Math.floor(Math.random()*16)];
+                 }
+                 return color;
+             }
+            function make_shape_appear()
+            {  
+                start=new Date().getTime();
+                var c=(Math.random()*200)+100;
+                var width=Math.random()*1000;
+                var s=Math.random()*200;
+                if(Math.random() > 0.5)
+                {
+                    document.getElementById("shape").style.borderRadius = "50%";
+                }
+                else
+                {
+                    document.getElementById("shape").style.borderRadius = "0";
+                }
+                document.getElementById("shape").style.backgroundColor = getRandomColor();
+                document.getElementById("shape").style.width = c+"px";
+                document.getElementById("shape").style.height= c +"px";
+                 document.getElementById("shape").style.top = c + "px";
+                 document.getElementById("shape").style.left= width + "px";
+                document.getElementById("shape").style.display = "block";
+                
+            }
+            function appear()
+            {
+                setTimeout(make_shape_appear,Math.random()*2000);
+            }
+           appear();
+            document.getElementById("shape").onclick=function()
+            {
+                document.getElementById("shape").style.display = "none";
+                var end =new Date().getTime();
+                var timeTaken=(end-start)/1000;
+                document.getElementById("timetaken").innerHTML = timeTaken + "s";
+                appear();
+            }
+        </script>
+    </body>
+</html>
